@@ -25,7 +25,7 @@ const controller = class ProductsController {
 
             try {
                 let cartContent = await this.getContent(user);
-                let cartProducts = cartContent.content;
+                let cartProducts = JSON.parse(cartContent.content);
 
                 for(let cartProduct of cartProducts) {
                     for(let newProduct of newProducts) {
@@ -59,7 +59,7 @@ const controller = class ProductsController {
 
             try {
                 let cartContent = await this.getContent(user);
-                let cartProducts = cartContent.content;
+                let cartProducts = JSON.parse (cartContent.content);
                 let found = false;
 
                 for (let cartProduct of cartProducts) {
