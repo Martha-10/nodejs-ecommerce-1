@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const config = require('../config/app-config.js');
+require('dotenv').config()
 
 // required libraries
 const bodyParser = require('body-parser');
@@ -10,14 +11,20 @@ const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(session);
 const sessionStore = new MySQLStore(config.sqlCon);
 
-// global middleware
+// // global middleware
+// router.use(session({
+//     name: process.env.SESSION_NAME,
+//     key: process.env.SESSION_KEY,
+//     secret: process.env.SESSION_SECRET,
+//     store: sessionStore,
+//     resave: false,
+//     saveUninitialized: false
+// }));
 router.use(session({
-    name: process.env.SESSION_NAME,
-    key: process.env.SESSION_KEY,
     secret: process.env.SESSION_SECRET,
-    store: sessionStore,
     resave: false,
-    saveUninitialized: false
+    saveUnitialized: true,
+    cookie: {secure: true}
 }));
 
 router.use(bodyParser.json()); // support json encoded bodies
