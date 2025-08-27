@@ -131,16 +131,3 @@ const controller = class ProductsController {
 }
 
 module.exports = controller;
-
-
-
-
-
-
-
-
-
-
-
-
-
