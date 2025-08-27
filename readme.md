@@ -47,6 +47,3 @@ password: 123456
 email: admin@admin.com
 password: 123456
 ````
-## Author
-
-* **Guilherme Carra** - [GitHub](https://github.com/GuilhermeCarra/) - [Glitch](https://glitch.com/@GuilhermeCarra/) - [Linkedin](https://www.linkedin.com/in/guilherme-carra/)
