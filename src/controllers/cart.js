@@ -20,40 +20,53 @@ const controller = class ProductsController {
         });
     }
 
-    addToCart(newProducts, user){
-        return new Promise( async(resolve,reject) => {
-
+    addToCart(newProducts, user) {
+        return new Promise( async(resolve, reject) => {
             try {
+                // Obtener el contenido actual del carrito del usuario
                 let cartContent = await this.getContent(user);
                 let cartProducts = JSON.parse(cartContent.content);
-
-                for(let cartProduct of cartProducts) {
-                    for(let newProduct of newProducts) {
-                        if (cartProduct.id == newProduct.id && cartProduct.size == newProduct.size) {
-                            cartProduct.quantity = newProduct.quantity + cartProduct.quantity;
-                            let index = newProducts.indexOf(newProduct);
-                            newProducts.splice(index, 1);
+    
+                // Recorremos los productos nuevos que se quieren agregar al carrito
+                for (let newProduct of newProducts) {
+                    let productFound = false;
+    
+                    // Buscamos si el producto ya existe en el carrito
+                    for (let cartProduct of cartProducts) {
+                        if (cartProduct.id === newProduct.id && cartProduct.size === newProduct.size) {
+                            // Si el producto ya existe, sumamos la cantidad
+                            cartProduct.quantity += newProduct.quantity;
+                            productFound = true;
+                            break; // Salimos del bucle porque ya actualizamos el producto
                         }
                     }
+    
+                    // Si el producto no se encuentra en el carrito, lo agregamos
+                    if (!productFound) {
+                        cartProducts.push(newProduct);
+                    }
                 }
-
-                cartProducts = JSON.stringify(cartProducts.concat(newProducts));
-
-                this.con.query('UPDATE `cart` SET `content` = ? WHERE `user_id` = ?', [cartProducts,user], function (err, result) {
-                    if(err) reject(new Error('Database connection error'));
+    
+                // Convertimos el carrito actualizado a formato JSON
+                cartProducts = JSON.stringify(cartProducts);
+    
+                // Actualizamos el carrito en la base de datos
+                this.con.query('UPDATE `cart` SET `content` = ? WHERE `user_id` = ?', [cartProducts, user], function (err, result) {
+                    if (err) reject(new Error('Database connection error'));
                     resolve('Added to the cart!');
                 });
-
-            } catch {
-                let cartRow = {user_id: user, content: JSON.stringify(newProducts)};
+    
+            } catch (err) {
+                // Si ocurre un error (por ejemplo, no hay carrito existente), creamos un carrito nuevo
+                let cartRow = { user_id: user, content: JSON.stringify(newProducts) };
                 this.con.query('INSERT INTO `cart` SET ?', cartRow, function (err, result) {
-                    if(err) reject(new Error('Database connection error'));
+                    if (err) reject(new Error('Database connection error'));
                     resolve('Added to the cart!');
                 });
             }
         });
     }
-
+    
     update(updateProduct, user) {
         return new Promise( async(resolve,reject) => {
 
