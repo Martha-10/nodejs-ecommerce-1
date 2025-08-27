@@ -23,4 +23,9 @@ app.use('/dashboard', require('./dashboard.js'))
 app.use('/ajax', require('./ajax.js'))
 
 // server initialization
-app.listen(process.env.APP_PORT, () => console.log('Server is running'));
+// app.listen(process.env.APP_PORT, () => console.log('Server is running'));
+const PORT = process.env.APP_PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
