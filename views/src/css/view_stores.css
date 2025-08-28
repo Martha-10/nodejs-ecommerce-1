@@ -1,0 +1,422 @@
+/* Botón de carrito personalizado */
+.cart-button {
+    background: #c2185b;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px #0002;
+    transition: background 0.2s, transform 0.2s;
+}
+.cart-button:hover {
+    background: #ad1457;
+    transform: scale(1.07);
+}
+:root {
+    --pink-light: #ffe0ef;
+    --barbie: #e55e99;
+    --morita: #ebb9df;
+    --text-dark: #333;
+    --pinky:#fac4db;
+}
+
+body {
+    margin: 0;
+    font-family: "Quicksand", sans-serif;
+    background: url('img/plaza-san-nicolas.jpg') center center / cover fixed no-repeat;
+    color: var(--text-color);
+}
+
+
+.header {
+    background: var(--barbie);
+    padding: 16px 24px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 500;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+  background-color: var(--pink-light);
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+  font-size: 0.8rem;
+}
+
+nav a::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--barbie);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a:hover {
+  color: var(--barbie);
+}
+
+.banner {
+    background: linear-gradient(90deg, var(--barbie), #cc0066, #ff66a3);
+    background-size: 300% 100%;
+    color: white;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    animation: shine 5s infinite linear;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
+}
+
+.banner strong {
+    color: #ffe4ec;
+}
+
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("image/portada1.png");
+    background-size: cover;
+    background-position: center;
+    filter: blur(px);
+    z-index: 1;
+}
+
+
+.slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.slider-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.slider-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.slider-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--pinky);
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all var(--transition-time);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+}
+
+.cta-button:hover {
+    color: var(--barbie);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.explore {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 1100px;
+    margin: 3rem auto;
+    font-family: 'Inter', sans-serif;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+
+.explore::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 99, 132, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.explore * {
+    position: relative;
+    z-index: 2;
+}
+
+
+.explore h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.explore h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--main-color);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+
+.explore p {
+    font-size: 1rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+
+.shops {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,
+            minmax(min(240px, 100%), 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.8s forwards ease-out;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.shop-card {
+    background: var(--pin);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 15px 15px rgba(240, 110, 216, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--barbie) ease, box-shadow var(--barbie) ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(246, 114, 221, 0.15);
+    animation: float 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+.shop-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0) 60%);
+    transform: rotate(45deg) translate(-100%, -100%);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.shop-card:hover::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(0, 0);
+}
+
+
+.shop-card figure {
+    margin: 0;
+}
+
+.shop-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.shop-card figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--text-dark);
+}
+
+.footer {
+    background: var(--pinky);
+    padding: 48px 24px;
+    margin-top: 64px;
+}
+
+.footer-content {
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-title {
+    color: var(--barbie);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.footer-subtitle {
+    color: var(--barbie);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-links img {
+  width: 30px;
+  height: 30px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    color: var(--barbie);
+}
+
+@media (max-width: 768px) {
+    .slider-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .slider-content p {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    .explore {
+        padding: 2rem 1rem;
+    }
+}

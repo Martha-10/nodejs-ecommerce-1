@@ -5,16 +5,16 @@ const config = require('../config/app-config.js');
 const express = require("express");
 const app = express();
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
+// Eliminar motor de vistas, solo HTML y archivos estáticos
 
 // required libraries
 require('dotenv').config();
 const helmet = require('helmet')
 app.use(helmet())
 
-// static folder
-app.use(express.static(config.root));
+// static folders
+app.use(express.static(config.root + '/public'));
+app.use(express.static(config.root + '/views'));
 
 // routes
 app.use('/', require('./main.js'))

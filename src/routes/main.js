@@ -1,5 +1,6 @@
 // express initialization
 const express = require("express");
+const path = require("path");
 const router = express.Router();
 const config = require('../config/app-config.js');
 
@@ -41,114 +42,43 @@ router.use(async function(req,res,next) {
 
 // Index page
 router.get("/", (req, res) => {
-    res.render(`${config.views}/public/index.ejs`);
+    res.sendFile(path.join(__dirname, '../../views/index.html'));
 });
 
 // Products page
 router.get("/hamburguers", async (req, res) => {
-    const ProductsController = require('../controllers/products.js');
-    const Products = new ProductsController();
-
-    try {
-        products = await Products.getPaginated(page = 0);
-    } catch (e) {
-        throw e;
-    }
-
-    res.render(`${config.views}/public/hamburguers.ejs`, {products: products});
+    // Si necesitas pasar datos, deberás usar AJAX/fetch desde el frontend
+    res.sendFile(path.join(__dirname, '../../views/src/pages/view_stores.html'));
 });
 
 // Product order page
 router.get("/order", authenticate(), async (req, res) => {
-    const ProductsController = require('../controllers/products.js');
-    const Products = new ProductsController();
-
-    try {
-        product = await Products.getProduct(req.query.p);
-    } catch (e) {
-        throw e;
-    }
-
-    res.render(`${config.views}/public/order.ejs`, {product: product});
+    res.sendFile(path.join(__dirname, '../../views/src/pages/view_customer.html'));
 });
 
+// Ruta para mostrar el carrito
+router.get("/cart", authenticate(), async (req, res) => {
+    res.sendFile(path.join(__dirname, '../../views/cart.html'));
+});
 // cart page
 router.get("/cart", authenticate(), async (req, res) => {
-    const ProductsController = require('../controllers/products.js');
-    const Products = new ProductsController();
-    const CartController = require('../controllers/cart.js');
-    const Cart = new CartController();
-    let cartContent;
-    let products;
-
-    try {
-        cartContent = await Cart.getContent(req.session.passport.user);
-        let idList = cartContent.content.map(({ id }) => id)
-        idList = Array.from(new Set(idList)).toString();
-        products = await Products.getByIdArray(idList);
-    } catch (err) {
-        console.log(err);
-        cartContent = false;
-    }
-
-    if (cartContent) products = JSON.parse(JSON.stringify(products))
-    res.render(`${config.views}/public/cart.ejs`, {cart: cartContent.content, products: products});
+    res.sendFile(path.join(__dirname, '../../views/src/pages/view_admin.html'));
 });
 
 // checkout process
 router.get("/checkout", authenticate(), async (req, res) => {
-    let formErrors = req.session.formErrors ? req.session.formErrors : false;
-    req.session.formErrors = false;
-    res.render(`${config.views}/public/checkoutProcess.ejs`, {errors: formErrors});
+    res.sendFile(path.join(__dirname, '../../views/src/pages/view_seller.html'));
 });
 
 // checkout order
-router.post("/checkout", authenticate(),
-    [check('city').isLength({ min: 3 }),
-    check('address').isLength({ min: 3 }),
-    check('city').isLength({ min: 3 }),
-    check('zip').isNumeric(),
-    check('card').isNumeric(),
-    check('expMonth').isLength({min: 2, max: 2}),
-    check('expYear').isLength({min: 2, max: 2}),
-    check('cvCode').isLength({min: 3, max: 3})],
-async (req, res) => {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-        req.session.formErrors = errors.array();
-        res.redirect('/checkout');
-
-    } else {
-
-        const CartController = require('../controllers/cart.js');
-        const Cart = new CartController();
-
-        const OrdersController = require('../controllers/orders.js');
-        const Orders = new OrdersController();
-
-        let cartContent;
-        let orderId;
-        let userId = req.session.passport.user;
-
-        try {
-            cartContent = await Cart.getContent(userId);
-            cartContent = cartContent.content;
-            orderId = await Orders.create({costumer_id: userId});
-            Orders.saveOrderProducts(orderId, cartContent)
-            Cart.empty(userId);
-        } catch(e) {
-            throw e;
-        }
-
-        res.render(`${config.views}/public/checkout.ejs`);
-    }
-
+router.post("/checkout", authenticate(), async (req, res) => {
+    // Aquí deberías procesar el pedido y luego redirigir o mostrar una página de confirmación
+    res.sendFile(path.join(__dirname, '../../views/src/pages/view_seller.html'));
 });
 
 // contact page
 router.get("/contact", (req, res) => {
-    res.render(`${config.views}/public/contact.ejs`);
+    res.sendFile(path.join(__dirname, '../../views/src/pages/login.html'));
 });
 
 // auth verify middleware

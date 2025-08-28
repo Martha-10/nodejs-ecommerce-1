@@ -123,5 +123,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
     }
+    
+    // cartPage.js - Lógica para mostrar productos del carrito usando fetch y renderizado puro
+    cargarCarrito();
+
+    async function cargarCarrito() {
+        const cartContent = document.getElementById('cartContent');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        try {
+            const res = await fetch('/ajax/cart');
+            if (!res.ok) throw new Error('No se pudo cargar el carrito');
+            const data = await res.json();
+            if (!data.items || data.items.length === 0) {
+                cartContent.innerHTML = '<p class="empty">Tu carrito está vacío.</p>';
+                cartTotal.textContent = '';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            let html = `<table><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr></thead><tbody>`;
+            let total = 0;
+            data.items.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                html += `<tr><td>${item.name}</td><td>${item.quantity}</td><td>$${item.price.toFixed(2)}</td><td>$${subtotal.toFixed(2)}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            cartContent.innerHTML = html;
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            checkoutBtn.disabled = false;
+        } catch (err) {
+            cartContent.innerHTML = '<p class="empty">Error al cargar el carrito.</p>';
+            cartTotal.textContent = '';
+            checkoutBtn.disabled = true;
+        }
+    }
 
 });

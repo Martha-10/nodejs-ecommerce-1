@@ -1,0 +1,392 @@
+/* Botón de carrito personalizado */
+.cart-button {
+  background: #c2185b;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 1.1em;
+  margin-left: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #0002;
+  transition: background 0.2s, transform 0.2s;
+}
+.cart-button:hover {
+  background: #ad1457;
+  transform: scale(1.07);
+}
+:root {
+    --pink-light: #ffe0ef;
+    --barbie: #e55e99;
+    --morita: #ebb9df;
+    --text-dark: #333;
+    --pinky:#fac4db;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  min-height: 100vh;
+  color: #2c2c2c;
+}
+
+.header {
+    background: var(--barbie);
+    padding: 16px 24px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 500;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+  background-color: var(--pink-light);
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+  font-size: 0.8rem;
+}
+
+nav a::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--barbie);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a:hover {
+  color: var(--barbie);
+}
+
+/* Estilo del título */
+.hero-title {
+  font-size: 4rem;
+  margin-left: 35%;
+  font-weight: bold;
+  color: var(--barbie);
+  text-shadow: 
+    2px 2px 8px var(--pink-light), 
+    -2px -2px 8px var(--pinky); /* sombra + toque rosado */
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Carousel Styles */
+.carousel-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px var(--barbie);
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--barbie);
+}
+
+.carousel-nav:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: linear-gradient(45deg, var(--barbie), var(--pinky));
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Products Section */
+.products {
+  max-width: 1152px;
+  margin: 0 auto 48px;
+}
+
+.products h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--barbie);
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+.product {
+  background: var(--pink-light);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-10px) scale(1.03);
+  color: var(--barbie);
+}
+
+.product img {
+  width: 120px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Footer */
+.footer {
+    background: var(--pinky);
+    padding: 48px 24px;
+    margin-top: 64px;
+}
+
+.footer-content {
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-title {
+    color: var(--barbie);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.footer-subtitle {
+    color: var(--barbie);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-links img {
+  width: 30px;
+  height: 30px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    color: var(--barbie);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo {
+      position: static;
+      transform: none;
+      margin: 10px auto;
+  }
+
+  nav {
+      padding: 10px;
+      gap: 10px;
+  }
+
+  nav a {
+      font-size: 11px;
+      padding: 6px 12px;
+  }
+
+  .hero h1 {
+      font-size: 2.5rem;
+  }
+
+  .buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .btn {
+      width: 80%;
+      max-width: 300px;
+  }
+
+  .grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 0 10px;
+  }
+
+  .product img {
+      width: 100px;
+      height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+      flex-direction: column;
+      gap: 8px;
+  }
+
+  .grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .products h2 {
+      font-size: 2rem;
+  }
+
+  .social-links {
+      gap: 15px;
+  }
+}
+
+/* Special Effects */
+.product::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--barbie);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.product:hover::before {
+  opacity: 0.7;
+}
+
+.product {
+  position: relative;
+}
